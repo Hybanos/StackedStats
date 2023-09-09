@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "hybanos.stackedstats.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "ClientPlayNetworkHandlerMixin",
+    "ServerStatHandlerAccessor",
+    "StatsScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

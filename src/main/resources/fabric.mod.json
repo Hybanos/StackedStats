@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "stackedstats",
+  "version": "${version}",
+  "name": "StackedStats",
+  "description": "Adds up stats between accounts.",
+  "authors": [
+    "Hybanos"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/StackedStats/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "hybanos.stackedstats.StackedStatsClient"
+    ]
+  },
+  "mixins": [
+    "StackedStats.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "minecraft": "1.19.2",
+    "java": ">=17"
+  }
+}
