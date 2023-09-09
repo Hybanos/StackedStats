@@ -9,6 +9,7 @@ import hybanos.stackedstats.mixin.ServerStatHandlerAccessor;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMaps;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.minecraft.MinecraftVersion;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.gui.screen.StatsListener;
 import net.minecraft.client.gui.screen.StatsScreen;
@@ -19,7 +20,7 @@ import net.minecraft.stat.Stat;
 import net.minecraft.stat.StatType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
@@ -60,11 +61,11 @@ public class StatsSaver {
         }
         JsonObject jsonObject = new JsonObject();
         for (Map.Entry entry : map.entrySet()) {
-            jsonObject.add(Registry.STAT_TYPE.getId((StatType)entry.getKey()).toString(), (JsonElement)entry.getValue());
+            jsonObject.add(Registries.STAT_TYPE.getId((StatType)entry.getKey()).toString(), (JsonElement)entry.getValue());
         }
         JsonObject jsonObject2 = new JsonObject();
         jsonObject2.add("stats", jsonObject);
-        jsonObject2.addProperty("DataVersion", SharedConstants.getGameVersion().getWorldVersion());
+        jsonObject2.addProperty("DataVersion", SharedConstants.getGameVersion().getSaveVersion().getId());
         return jsonObject2.toString();
     }
 
@@ -86,7 +87,7 @@ public class StatsSaver {
                 NbtCompound nbtCompound2 = nbtCompound.getCompound("stats");
                 for (String string : nbtCompound2.getKeys()) {
                     if (!nbtCompound2.contains(string, NbtElement.COMPOUND_TYPE)) continue;
-                    Util.ifPresentOrElse(Registry.STAT_TYPE.getOrEmpty(new Identifier(string)), statType -> {
+                    Util.ifPresentOrElse(Registries.STAT_TYPE.getOrEmpty(new Identifier(string)), statType -> {
                         NbtCompound nbtCompound3 = nbtCompound2.getCompound(string);
                         for (String string2 : nbtCompound3.getKeys()) {
                             if (nbtCompound3.contains(string2, NbtElement.NUMBER_TYPE)) {
