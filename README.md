@@ -1,6 +1,6 @@
 # StackedStats
 
-Simple client side mods that combines the player statistics of all your accounts on servers.
+Simple client side mod that combines the player statistics of all your accounts on servers.
 
 # How to use
 
